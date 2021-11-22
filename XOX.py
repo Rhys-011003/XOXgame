@@ -1,74 +1,66 @@
 import tkinter as tk
-from tkinter.constants import FALSE, S, TRUE
-from tkinter.font import Font
+from tkinter import font
+
+
+#previous player set as None
+previousPlayer=""
+
+
+#Function To choose next player
+class PLayerSet:
+    def __init__(self,PreviousPlayer):
+        self.name=PreviousPlayer
+    def NextPlayer(PreviousPlayer):
+        global previousPlayer
+        if PreviousPlayer=="X":
+            PreviousPlayer="O"
+            previousPlayer="O"
+
+        elif PreviousPlayer=="O":
+            PreviousPlayer="X"
+            previousPlayer="X"
+
+        elif PreviousPlayer=="":
+            PreviousPlayer="X"
+            previousPlayer="X"
+
+        return PreviousPlayer
+
+#PLayerSet.NextPlayer(PLayerSet,"X")
+#print(previousPlayer)
 
 
 
 
 
-
-
+#tkinter Window#########################
 root=tk.Tk()
 
 
 
 
-canvas=tk.Canvas(root,width=300,height=300,bg="#FF9B6A")
+canvas=tk.Canvas(root,height=300,width=300,bg="#94B3FD")
 canvas.grid(columnspan=3,rowspan=3)
-BUTTON_WIDTH_HEIGHT=4
+
+
+ButtonImage=tk.PhotoImage(file="logo.png")
 
 
 
+def PlacePlayer(col,row,Colour):
 
+    def Command():  
+        global previousPlayer
+        PLayerSet.NextPlayer(previousPlayer)
+        PlayerText.set(previousPlayer)
 
-
-       
-
-
-
-#button
-def XOButton(col,row,colour):
-
-
-    #buttonPressedCommand
-    def command():    
-        if  X_OText.get()=="X":
-            X_OText.set("O")    
-        elif X_OText.get()=="O":
-            X_OText.set("X")     
-        elif X_OText.get()=="":
-            X_OText.set("X")
-        
-        
-
-            
-
-    #button
-    X_OText=tk.StringVar(root,"",str(col)+str(row))
-    X_OButton=tk.Button(width=BUTTON_WIDTH_HEIGHT*2,height=BUTTON_WIDTH_HEIGHT,textvariable=X_OText,font="Impact",bg=colour,command=command,borderwidth = 0)
-    X_OText.set("")
-    X_OButton.grid(column=col,row=row)
+    PlayerText=tk.StringVar(root,"")
+    box=tk.Button(root,height=4,width=10,textvariable=PlayerText,command=Command,font="Impact",bg=Colour,borderwidth=0)
+    box.grid(column=col,row=row)
 
 for row in range(3):
     for column in range(3):
-        XOButton(row,column,"#88E0EF")
-
-
-
-
-
-
-
-
-
-
-
-   
-
-        
-
-
-
+        PlacePlayer(column,row,"#B983FF")
 
 
 
